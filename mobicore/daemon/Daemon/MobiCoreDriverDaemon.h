@@ -48,7 +48,7 @@
 
 #define MAX_SERVERS 2
 
-extern string getTlRegistryPath();
+extern std::string getTlRegistryPath();
 
 class MobicoreDriverResources
 {

@@ -99,7 +99,7 @@ public:
 
 protected:
     int serverSock;
-    string socketAddr;
+    std::string socketAddr;
     ConnectionHandler   *connectionHandler; /**< Connection handler registered to the server */
 
 private:
