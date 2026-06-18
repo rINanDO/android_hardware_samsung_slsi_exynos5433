@@ -118,6 +118,7 @@ LOCAL_MODULE := camera.$(TARGET_BOOTLOADER_BOARD_NAME)
 #LOCAL_MODULE := camera.$(TARGET_BOARD_PLATFORM)
 endif
 LOCAL_MODULE_TAGS := optional
+LOCAL_PROPRIETARY_MODULE := true
 
 LOCAL_CFLAGS += -D$(shell echo $(project_camera) | tr a-z A-Z)_CAMERA
 

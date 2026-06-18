@@ -20,7 +20,7 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE_RELATIVE_PATH:= hw
-#LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/hw
+LOCAL_VENDOR_MODULE := true
 LOCAL_SHARED_LIBRARIES := liblog libcutils libion libutils
 
 ifneq ($(TARGET_SOC), exynos5420)
@@ -32,7 +32,8 @@ MALI_AFBC_GRALLOC := 1
 LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/../include \
 	$(TOP)/hardware/samsung_slsi/exynos/include \
-	$(TOP)/hardware/samsung_slsi/exynos5/include
+	$(TOP)/hardware/samsung_slsi/exynos5/include \
+	$(TOP)/hardware/libhardware/include
 
 LOCAL_SRC_FILES := 	\
 	format_chooser.cpp \
