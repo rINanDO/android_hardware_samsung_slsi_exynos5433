@@ -19,7 +19,7 @@ include $(CLEAR_VARS)
 MOBICORE_PATH := hardware/samsung_slsi/$(TARGET_SOC)/mobicore
 CURRENT_PATH := hardware/samsung_slsi/$(TARGET_SOC)/libgatekeeper
 
-LOCAL_MODULE := gatekeeper.$(TARGET_SOC)
+LOCAL_MODULE := gatekeeper.$(TARGET_BOOTLOADER_BOARD_NAME)
 
 LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_PROPRIETARY_MODULE := true
@@ -28,6 +28,7 @@ LOCAL_SRC_FILES := exynos_gatekeeper.cpp \
 		   tlcTeeGatekeeper_if.cpp
 
 LOCAL_C_INCLUDES := \
+	$(CURRENT_PATH)/compat \
 	$(CURRENT_PATH)/include \
 	$(MOBICORE_PATH)/daemon/ClientLib/public \
 	$(MOBICORE_PATH)/common/MobiCore/inc/
@@ -39,6 +40,9 @@ ifeq ($(PRODUCT_TRUSTZONE_ENABLED), true)
 LOCAL_CFLAGS += -DACCESS_EFS_POSSIBLE
 endif
 LOCAL_SHARED_LIBRARIES := liblog \
+			  libcutils \
+			  libutils \
+			  libhardware \
 			  libMcClient
 
 LOCAL_MODULE_TAGS := optional

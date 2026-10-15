@@ -276,7 +276,7 @@ static int exynos_gk_open(const hw_module_t *module, const char *name,
 }
 
 static struct hw_module_methods_t gatekeeper_module_methods = {
-    open: exynos_gk_open,
+    .open = exynos_gk_open,
 };
 
 
