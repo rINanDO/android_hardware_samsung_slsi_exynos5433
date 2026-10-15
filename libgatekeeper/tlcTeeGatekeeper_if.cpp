@@ -40,8 +40,8 @@
 #define FNAME	"/efs/TEE/gk_context_"
 #define FNAME_SUB	"/efs/TEE/gk_context_sub_"
 #else
-#define FNAME	"/data/app/gk_context_"
-#define FNAME_SUB	"/data/app/gk_context_sub_"
+#define FNAME	"/data/vendor/gatekeeper/gk_context_"
+#define FNAME_SUB	"/data/vendor/gatekeeper/gk_context_sub_"
 #endif
 #define SECURE_OBJECT_SIZE 108
 
@@ -54,7 +54,7 @@ tciMessage_ptr     pTci = NULL;
 mcSessionHandle_t  sessionHandle;
 
 /** File path for Trusted Application */
-char secureSecDispTrustedApp[] = "/system/app/mcRegistry/08130000000000000000000000000000.tlbin";
+char secureSecDispTrustedApp[] = "/vendor/app/mcRegistry/08130000000000000000000000000000.tlbin";
 
 #define TEE_SESSION_CLOSED 0
 #define TEE_SESSION_OPENED 1
@@ -170,7 +170,7 @@ static tciMessage_ptr TEE_Open(mcSessionHandle_t *SessionHandle)
 	mcRet = mcOpenDevice(gDeviceId);
 	if (mcRet != MC_DRV_OK) {
 		LOG_E("Error opening device: %d", mcRet);
-		return false;
+		return nullptr;
 	}
 
 	LOG_I("Allocating buffer for TCI");
@@ -179,7 +179,7 @@ static tciMessage_ptr TEE_Open(mcSessionHandle_t *SessionHandle)
 	if (tci == NULL) {
 		LOG_I("Allocation of TCI failed");
 		//LOG_ERRNO("Allocation of TCI failed");
-		return false;
+		return nullptr;
 	}
 	memset(tci, 0x00, sizeof(tciMessage_t));
 	nTrustedAppLength = getFileContent(secureSecDispTrustedApp,
@@ -189,7 +189,7 @@ static tciMessage_ptr TEE_Open(mcSessionHandle_t *SessionHandle)
 		LOG_E("Trusted Application not found");
 		free(tci);
 		tci = NULL;
-		return false;
+		return nullptr;
 	}
 
 	LOG_I("Opening the Trusted Application session");
@@ -206,7 +206,7 @@ static tciMessage_ptr TEE_Open(mcSessionHandle_t *SessionHandle)
 		LOG_E("Open session failed: %d", mcRet);
 		free(tci);
 		tci= NULL;
-		return false;
+		return nullptr;
 	}
 
 	LOG_I("mcOpenTrustlet() succeeded");
